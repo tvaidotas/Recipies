@@ -12,7 +12,16 @@
     <body>
 
         <header>
+
+            <a href="/">Homepage</a>
+            <a href="/login">Login page</a>
+
             <h3>Logged in as: @request.session.get("username")</h3>
+
+            <form method="POST" action="/logout">
+                <button type="submit">Logout</button>
+            </form>
+
         </header>
 
         @content
