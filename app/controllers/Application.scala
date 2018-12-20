@@ -9,7 +9,7 @@ import play.api.mvc._
 class Application @Inject()(val messagesApi: MessagesApi, val materializer: Materializer) extends Controller
   with I18nSupport {
 
-  def index = AuthenticatedAction {
+  def index = AuthenticatedAction { implicit request =>
     Ok(views.html.index("Your new application is ready."))
   }
 
