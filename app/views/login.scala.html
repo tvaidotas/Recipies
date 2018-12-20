@@ -1,0 +1,16 @@
+@(form: Form[Login])(implicit messages: Messages)
+
+@main("Login") {
+
+    <div>
+        <h2>Welcome to the login page</h2>
+    </div>
+    <div>
+        @helper.form(routes.LoginController.loginSubmit()){
+            @helper.inputText(form("username"), '_label -> "Login", '_showConstraints -> false)
+            @helper.inputText(form("password"), '_label -> "Password", '_showConstraints -> false)
+            <button type="submit">Submit</button>
+        }
+    </div>
+
+}
