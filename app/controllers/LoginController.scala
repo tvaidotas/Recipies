@@ -25,8 +25,4 @@ class LoginController @Inject()(val messagesApi: MessagesApi, val materializer: 
     })
   }
 
-  def logout: Action[AnyContent] = Action{ implicit request =>
-    Ok("You're succesfully logged out").withSession()
-  }
-
 }
