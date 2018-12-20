@@ -14,4 +14,11 @@ object Login {
     )(Login.apply)(Login.unapply)
   )
 
+  def checkCredentials(loginDetails: Login): Boolean = {
+    if (loginDetails.username == "admin" && loginDetails.password == "password")
+      true
+    else
+      false
+  }
+
 }
