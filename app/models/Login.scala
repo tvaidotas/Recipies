@@ -21,4 +21,11 @@ object Login {
       false
   }
 
+  def checkUser(loginDetails: String): String = {
+    if (loginDetails == "admin")
+      "admin"
+    else
+      ""
+  }
+
 }
