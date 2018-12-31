@@ -1,0 +1,20 @@
+@(form: Form[Recipe])(implicit messages: Messages, request: Request[AnyContent])
+
+@main("Login") {
+
+    <div>
+        <h2>Please fill in the form</h2>
+    </div>
+
+    <div>
+        @helper.form(routes.RecipeController.recipeSubmit()){
+            @helper.inputText(form("title"), '_label -> "Title", '_showConstraints -> false)
+            @helper.textarea(form("steps"), '_label -> "Steps", '_showConstraints -> false)
+
+
+            <input type="hidden" name="username" value="@form.data.get("username")" />
+            <button type="submit">Submit</button>
+        }
+    </div>
+
+}

@@ -7,7 +7,7 @@ import models.SignUp
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, Controller}
 import services.MongoServices
-import models.JsonFormats._
+import helpers.JsonFormats._
 
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import scala.concurrent.Future

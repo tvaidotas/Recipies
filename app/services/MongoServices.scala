@@ -2,13 +2,13 @@ package services
 
 import helpers.Constants
 import javax.inject.Inject
-import models.{LoginDetails, SignUp}
+import models.{LoginDetails, Recipe, SignUp}
 import play.api.mvc.Controller
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 import reactivemongo.play.json.collection.JSONCollection
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json.Json
-import models.JsonFormats._
+import helpers.JsonFormats._
 import reactivemongo.play.json._
 
 import scala.concurrent.Future
@@ -29,6 +29,18 @@ class MongoServices @Inject()(val reactiveMongoApi: ReactiveMongoApi) extends Co
         )
       ).cursor[SignUp]
     }.flatMap(_.collect[List]()).map(list => list.length == 1)
+  }
+
+  def getAllRecipes(username: String) = {
+    getCollection("recipes").map {
+      _.find(
+        Json.obj(
+          "username" -> username
+        )
+      )
+        .sort(Json.obj("created" -> -1))
+        .cursor[Recipe]
+    }.flatMap(_.collect[List]())
   }
 
 }
