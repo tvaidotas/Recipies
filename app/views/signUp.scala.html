@@ -7,7 +7,7 @@
     </div>
 
     <div>
-        @helper.form(routes.LoginController.loginSubmit()){
+        @helper.form(routes.SignUpController.signUpSubmit()){
             @helper.inputText(form("firstName"), '_label -> "First Name", '_showConstraints -> false)
             @helper.inputText(form("lastName"), '_label -> "Last Name", '_showConstraints -> false)
             @helper.inputText(form("username"), '_label -> "Login", '_showConstraints -> false)

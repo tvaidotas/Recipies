@@ -10,8 +10,8 @@
         @helper.form(routes.LoginController.loginSubmit()){
             @helper.inputText(form("username"), '_label -> "Login", '_showConstraints -> false)
             @helper.inputPassword(form("password"), '_label -> "Password", '_showConstraints -> false)
-            <button type="submit">Submit</button>
-            <a href="/signup"><button type="button">Sign up</button></a>
+            <button type="submit">Log In</button>
+            <a href="/signUp"><button type="button">Sign Up</button></a>
         }
     </div>
 
