@@ -17,8 +17,8 @@ class SignUpController @Inject()
 (val messagesApi: MessagesApi, val materializer: Materializer, val mongoServices: MongoServices)
   extends Controller with I18nSupport {
 
-  def signUp: Action[AnyContent] = Action { implicit request =>
-    Ok(views.html.signUp(SignUp.signupForm))
+  def signUp: Action[AnyContent] = Action.async { implicit request =>
+    Future{Ok(views.html.signUp(SignUp.signupForm))}
   }
 
   def signUpSubmit = Action.async { implicit request =>
