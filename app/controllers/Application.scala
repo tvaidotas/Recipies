@@ -13,7 +13,7 @@ class Application @Inject()(val messagesApi: MessagesApi, val materializer: Mate
   with I18nSupport {
 
   def index = AuthenticatedAction.async { implicit request =>
-    Future{Ok(views.html.index("Your new application is ready."))}
+    Future{Ok(views.html.index())}
   }
 
 }
