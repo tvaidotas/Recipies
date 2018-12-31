@@ -14,7 +14,10 @@
         <header>
 
             <a href="/">Homepage</a>
-            <a href="/login">Login page</a>
+
+            @if(request.session.get("username").isEmpty){
+                <a href="/login">Login page</a>
+            }
 
             <h3>Logged in as: @request.session.get("username")</h3>
 
