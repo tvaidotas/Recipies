@@ -8,7 +8,6 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.Controller
 import services.MongoServices
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
-import helpers.JsonFormats._
 
 class Application @Inject()
 (val messagesApi: MessagesApi, val materializer: Materializer, val mongoServices: MongoServices) extends Controller

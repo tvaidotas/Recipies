@@ -20,7 +20,7 @@ class LoginController @Inject()
   }
 
   def loginSubmit: Action[AnyContent] = Action.async { implicit request =>
-    var loginDetails = LoginDetails("", "")
+    var loginDetails = LoginDetails(Constants.emptyString.toString, Constants.emptyString.toString)
     LoginDetails.loginForm.bindFromRequest.fold({ formWithErrors =>
       BadRequest(views.html.login(formWithErrors))
     }, { details =>
@@ -30,7 +30,7 @@ class LoginController @Inject()
       if (result) {
         Redirect(routes.Application.index())
           .withSession(request.session + (Constants.username.toString -> loginDetails.username))
-          .flashing("login" -> "You have successfully logged in")
+          .flashing(Constants.login.toString -> Constants.loginMessage.toString)
       } else {
         Redirect(routes.LoginController.login())
       }

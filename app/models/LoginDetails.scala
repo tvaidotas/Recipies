@@ -1,5 +1,6 @@
 package models
 
+import helpers.Constants
 import play.api.data._
 import play.api.data.Forms._
 
@@ -9,23 +10,23 @@ object LoginDetails {
 
   val loginForm = Form(
     mapping(
-      "username" -> nonEmptyText,
-      "password" -> nonEmptyText
+      Constants.username.toString -> nonEmptyText,
+      Constants.password.toString -> nonEmptyText
     )(LoginDetails.apply)(LoginDetails.unapply)
   )
 
   def checkCredentials(loginDetails: LoginDetails): Boolean = {
-    if (loginDetails.username == "admin" && loginDetails.password == "password")
+    if (loginDetails.username == Constants.admin.toString && loginDetails.password == Constants.password.toString)
       true
     else
       false
   }
 
   def checkUser(loginDetails: String): String = {
-    if (loginDetails == "admin")
-      "admin"
+    if (loginDetails == Constants.admin.toString)
+      Constants.admin.toString
     else
-      ""
+      Constants.emptyString.toString
   }
 
 }

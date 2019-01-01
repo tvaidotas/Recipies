@@ -1,5 +1,6 @@
 package models
 
+import helpers.Constants
 import play.api.data._
 import play.api.data.Forms._
 
@@ -9,9 +10,9 @@ object Recipe {
 
   val recipeForm = Form(
     mapping(
-      "title" -> nonEmptyText,
-      "steps" -> nonEmptyText,
-      "username" -> nonEmptyText
+      Constants.title.toString -> nonEmptyText,
+      Constants.steps.toString -> nonEmptyText,
+      Constants.username.toString -> nonEmptyText
     )(Recipe.apply)(Recipe.unapply)
   )
 

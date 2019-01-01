@@ -18,17 +18,17 @@ class SignUpController @Inject()
   extends Controller with I18nSupport {
 
   def signUp: Action[AnyContent] = Action.async { implicit request =>
-    Future{Ok(views.html.signUp(SignUp.signupForm))}
+    Future{Ok(views.html.signUp(SignUp.signUpForm))}
   }
 
   def signUpSubmit = Action.async { implicit request =>
-    SignUp.signupForm.bindFromRequest.fold(
+    SignUp.signUpForm.bindFromRequest.fold(
       { formWithErrors =>
         Future {
           BadRequest(views.html.signUp(formWithErrors))
         }
       }, { signUpDetails =>
-        mongoServices.getCollection("test").flatMap(_.insert(signUpDetails))
+        mongoServices.getCollection(Constants.loginDetails.toString).flatMap(_.insert(signUpDetails))
           .map(_ =>
             Redirect("/").withSession(request.session + (Constants.username.toString -> signUpDetails.username))
           )

@@ -7,6 +7,16 @@ object Constants extends Enumeration {
   val removedDocument: Value = Value("removed document: ")
   val username: Value = Value("username")
   val firstName: Value = Value("firstName")
-  val lastname: Value = Value("lastName")
+  val lastName: Value = Value("lastName")
+  val password: Value = Value("password")
+  val emptyString: Value = Value("")
+  val admin: Value = Value("admin")
+  val steps: Value = Value("steps")
+  val title: Value = Value("title")
+  val recipes: Value = Value("recipes")
+  val loginDetails: Value = Value("loginDetails")
+  val created: Value = Value("created")
+  val login: Value = Value("login")
+  val loginMessage: Value = Value("You have successfully logged in")
 
 }

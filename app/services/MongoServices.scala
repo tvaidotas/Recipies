@@ -21,24 +21,24 @@ class MongoServices @Inject()(val reactiveMongoApi: ReactiveMongoApi) extends Co
   }
 
   def validUser(loginDetails: LoginDetails) = {
-    getCollection("test").map {
+    getCollection(Constants.loginDetails.toString).map {
       _.find(
         Json.obj(
           Constants.firstName.toString -> loginDetails.username,
-          Constants.lastname.toString -> loginDetails.password
+          Constants.lastName.toString -> loginDetails.password
         )
       ).cursor[SignUp]
     }.flatMap(_.collect[List]()).map(list => list.length == 1)
   }
 
   def getAllRecipes(username: String) = {
-    getCollection("recipes").map {
+    getCollection(Constants.recipes.toString).map {
       _.find(
         Json.obj(
-          "username" -> username
+          Constants.username.toString -> username
         )
       )
-        .sort(Json.obj("created" -> -1))
+        .sort(Json.obj(Constants.created.toString -> -1))
         .cursor[Recipe]
     }.flatMap(_.collect[List]())
   }
