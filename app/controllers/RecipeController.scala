@@ -9,6 +9,7 @@ import play.api.mvc.{Action, AnyContent, Controller}
 import services.MongoServices
 import helpers.JsonFormats._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import reactivemongo.bson.BSONObjectID
 
 import scala.concurrent.Future
 
@@ -22,6 +23,7 @@ class RecipeController @Inject()
         views.html.recipe(
           Recipe.recipeForm.fill(
             Recipe(
+              Some(BSONObjectID.generate().stringify),
               Constants.emptyString.toString,
               Constants.emptyString.toString,
               request.session.get(Constants.username.toString).getOrElse(Constants.emptyString.toString)

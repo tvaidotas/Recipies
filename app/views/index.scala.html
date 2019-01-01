@@ -3,9 +3,10 @@
 @main("Homepage") {
 
     <h1>@request.flash.get("login")</h1>
-    <h1>Homepage</h1>
 
-    <h1>Recipes</h1>
+    @if(recipes.nonEmpty) {
+        <h1>Recipes</h1>
+    }
     @for(recipe <- recipes){
         <h3>Title: @recipe.title</h3>
         <h3>Username: @recipe.username</h3>

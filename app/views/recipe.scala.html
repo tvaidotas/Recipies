@@ -8,6 +8,8 @@
 
     <div>
         @helper.form(routes.RecipeController.recipeSubmit()){
+            <input type="hidden" name="id" value="@form.data.get("id")" />
+
             @helper.inputText(form("title"), '_label -> "Title", '_showConstraints -> false)
             @helper.textarea(form("steps"), '_label -> "Steps", '_showConstraints -> false)
 
