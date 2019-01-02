@@ -4,7 +4,8 @@ import akka.stream.Materializer
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.AnyContent
 import services.MongoServices
-import reactivemongo.bson.BSONObjectID
+import reactivemongo.bson.{BSONDocument, BSONObjectID}
+
 import scala.concurrent.Future
 import helpers.Constants
 import javax.inject.Inject
@@ -63,6 +64,41 @@ class RecipeController @Inject()
           )
         }
         .map(_ => Redirect(routes.Application.index()))
+  }
+
+  def editRecipe(id: String): Action[AnyContent] = Action.async { implicit request =>
+    mongoServices.getRecipe(
+      request.session.get(Constants.username.toString).getOrElse(Constants.emptyString.toString),
+      id
+    ).map( recipe =>
+      Ok(
+        views.html.editRecipe(
+          Recipe.recipeForm.fill(
+            Recipe(
+              Some(recipe.head.id.get),
+              recipe.head.title,
+              recipe.head.steps,
+              request.session.get(Constants.username.toString).getOrElse(Constants.emptyString.toString)
+            )
+          )
+        )
+      )
+    )
+  }
+
+  def editRecipeSubmit: Action[AnyContent] = Action.async { implicit request =>
+    Recipe.recipeForm.bindFromRequest.fold(
+      { formWithErrors =>
+        Future {
+          BadRequest(views.html.recipe(formWithErrors))
+        }
+      }, { recipe =>
+        mongoServices.getCollection(Constants.recipes.toString).map(_.findAndUpdate(BSONDocument(Constants.id.toString -> recipe.id.getOrElse(Constants.emptyString.toString)), recipe))
+          .map(_ =>
+            Redirect(routes.RecipeController.recipe())
+          )
+      }
+    )
   }
 
 }

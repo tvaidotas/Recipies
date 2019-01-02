@@ -3,7 +3,6 @@ package models
 import helpers.Constants
 import play.api.data._
 import play.api.data.Forms._
-import reactivemongo.bson.BSONObjectID
 
 case class Recipe(id: Option[String] = None,title: String, steps: String, username: String)
 

@@ -14,9 +14,11 @@ class Application @Inject()
   with I18nSupport {
 
   def index = AuthenticatedAction.async { implicit request =>
-    mongoServices.getAllRecipes(request.session.get(Constants.username.toString).getOrElse("")).map(recipes =>
+    mongoServices.getAllRecipes(
+      request.session.get(Constants.username.toString).getOrElse(Constants.emptyString.toString)
+    ).map( recipes =>
       Ok(views.html.index(recipes))
-    )
+      )
   }
 
 }
