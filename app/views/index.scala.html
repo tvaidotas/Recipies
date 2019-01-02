@@ -11,10 +11,10 @@
         <h3>Title: @recipe.title</h3>
         <h3>Username: @recipe.username</h3>
         <h3>Steps: @recipe.steps</h3>
-        <form method="GET" action="/deleterecipe/@recipe.id.get">
+        <form method="GET" action="/deleterecipe/@recipe.id.get" class="button">
             <button type="submit">Delete</button>
         </form>
-        <form method="GET" action="/editrecipe/@recipe.id.get">
+        <form method="GET" action="/editrecipe/@recipe.id.get" class="button">
             <button type="submit">Edit</button>
         </form>
         <br>
