@@ -3,7 +3,7 @@ package services
 import helpers.Constants
 import javax.inject.Inject
 import models.{LoginDetails, Recipe, SignUp}
-import play.api.mvc.Controller
+import play.api.mvc.{Action, Controller}
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 import reactivemongo.play.json.collection.JSONCollection
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
@@ -41,6 +41,12 @@ class MongoServices @Inject()(val reactiveMongoApi: ReactiveMongoApi) extends Co
         .sort(Json.obj(Constants.created.toString -> -1))
         .cursor[Recipe]
     }.flatMap(_.collect[List]())
+  }
+
+  def deleteRecipe(id: String) = Action.async { implicit request =>
+    getCollection(Constants.recipes.toString)
+      .map{_.findAndRemove(Json.obj(Constants.id.toString -> id))}
+      .map(_ => Ok("Deleted recipe"))
   }
 
 }
