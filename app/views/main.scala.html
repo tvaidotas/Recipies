@@ -9,27 +9,36 @@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
     </head>
-    <body>
+    <body id="main">
 
-        <header>
-
-            <a href="/">Homepage</a>
-            <a href="/recipe">Add Recipe</a>
-
-            @if(request.session.get("username").isEmpty){
-                <a href="/login">Login page</a>
-            }
-
-            <h3>Logged in as: @request.session.get("username")</h3>
-
-            @if(request.session.get("username").isDefined) {
-                <form method="POST" action="/logout">
-                    <button type="submit">Logout</button>
-                </form>
-            }
-
+        <header class="container">
+            <nav>
+                <a href="/" class="LinkButton">Homepage</a>
+                <a href="/recipe" class="LinkButton">Add Recipe</a>
+                <a href="/" class="LinkButton">Placeholder</a>
+                <a href="/" class="LinkButton">Placeholder</a>
+                <a href="/" class="LinkButton">Placeholder</a>
+                <a href="/" class="LinkButton">Placeholder</a>
+                <a href="/" class="LinkButton">Placeholder</a>
+            </nav>
+            <br>
         </header>
 
+        @if(request.session.get("username").isEmpty){
+            <a href="/login" class="LinkButton">Login page</a>
+        }
+
+        <div id="loggedIn">
+            <h3>Logged in as: @request.session.get("username")
+                @if(request.session.get("username").isDefined) {
+                    <form method="POST" action="/logout">
+                        <button type="submit">Logout</button>
+                    </form>
+                }
+            </h3>
+        </div>
+
         @content
+
     </body>
 </html>

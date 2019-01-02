@@ -2,22 +2,30 @@
 
 @main("Homepage") {
 
-    <h1>@request.flash.get("login")</h1>
+    <div>
+        <h1>@request.flash.get("login")</h1>
+    </div>
 
-    @if(recipes.nonEmpty) {
-        <h1>Recipes</h1>
-    }
-    @for(recipe <- recipes){
-        <h3>Title: @recipe.title</h3>
-        <h3>Username: @recipe.username</h3>
-        <h3>Steps: @recipe.steps</h3>
-        <form method="GET" action="/deleterecipe/@recipe.id.get" class="button">
-            <button type="submit">Delete</button>
-        </form>
-        <form method="GET" action="/editrecipe/@recipe.id.get" class="button">
-            <button type="submit">Edit</button>
-        </form>
-        <br>
-    }
+    <div>
+        @if(recipes.nonEmpty) {
+            <h1>Recipes:</h1>
+        }
+    </div>
+    <div class="recipe">
+        @for(recipe <- recipes){
+            <div>
+                <form method="GET" action="/deleterecipe/@recipe.id.get" class="button">
+                    <button type="submit">Delete</button>
+                </form>
+                <form method="GET" action="/editrecipe/@recipe.id.get" class="button">
+                    <button type="submit">Edit</button>
+                </form>
+                <br>
+                <h3>Title: @recipe.title</h3>
+                <h3>Username: @recipe.username</h3>
+                <h3>Steps: @recipe.steps</h3>
+            </div>
+        }
+    </div>
 
 }
