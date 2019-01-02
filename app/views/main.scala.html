@@ -15,23 +15,19 @@
             <nav>
                 <a href="/" class="LinkButton">Homepage</a>
                 <a href="/recipe" class="LinkButton">Add Recipe</a>
-                <a href="/" class="LinkButton">Placeholder</a>
-                <a href="/" class="LinkButton">Placeholder</a>
-                <a href="/" class="LinkButton">Placeholder</a>
-                <a href="/" class="LinkButton">Placeholder</a>
-                <a href="/" class="LinkButton">Placeholder</a>
+                @if(request.session.get("username").isEmpty){
+                    <a href="/login" class="LinkButton">Login page</a>
+                }
             </nav>
             <br>
         </header>
 
-        @if(request.session.get("username").isEmpty){
-            <a href="/login" class="LinkButton">Login page</a>
-        }
+
 
         <div id="loggedIn">
             <h3>Logged in as: @request.session.get("username")
                 @if(request.session.get("username").isDefined) {
-                    <form method="POST" action="/logout">
+                    <form method="POST" action="/logout" >
                         <button type="submit">Logout</button>
                     </form>
                 }
