@@ -12,7 +12,7 @@
 4. Run the following command
     * sbt run
 5. Open the following URL in any browser you are using
-    * http://localhost:8080/
+    * http://localhost:9000/
     
 ### Functionality of the web application
 
@@ -26,4 +26,3 @@
 ### Play architecture
 
 Request life cycle: ![Alt](https://www.playframework.com/documentation/1.0/images/diagrams_path "Title")
- 
