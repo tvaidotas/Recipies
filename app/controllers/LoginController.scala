@@ -16,11 +16,15 @@ class LoginController @Inject()
   with I18nSupport {
 
   def login: Action[AnyContent] = Action.async { implicit request =>
-    Future{Ok(views.html.login(LoginDetails.loginForm))}
+    Future{
+      Ok(views.html.login(LoginDetails.loginForm))
+    }
   }
 
   def loginSubmit: Action[AnyContent] = Action.async { implicit request =>
-    var loginDetails = LoginDetails(Constants.emptyString.toString, Constants.emptyString.toString)
+    var loginDetails =
+      LoginDetails(Constants.emptyString.toString, Constants.emptyString.toString)
+
     LoginDetails.loginForm.bindFromRequest.fold({ formWithErrors =>
       BadRequest(views.html.login(formWithErrors))
     }, { details =>

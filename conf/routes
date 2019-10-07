@@ -16,7 +16,7 @@ POST        /signUp                         controllers.SignUpController.signUpS
 GET         /recipe                         controllers.RecipeController.recipe
 POST        /recipe                         controllers.RecipeController.recipeSubmit
 
-POST        /deleterecipe/$id<[^/]+>        controllers.RecipeController.deleteRecipe(id: String)
+GET        /deleterecipe/$id<[^/]+>        controllers.RecipeController.deleteRecipe(id: String)
 
 GET         /editrecipe/$id<[^/]+>          controllers.RecipeController.editRecipe(id: String)
 POST        /editrecipe                     controllers.RecipeController.editRecipeSubmit

@@ -15,16 +15,18 @@ object LoginDetails {
     )(LoginDetails.apply)(LoginDetails.unapply)
   )
 
-  def checkCredentials(loginDetails: LoginDetails): Boolean =
+  def checkCredentials(loginDetails: LoginDetails): Boolean = {
     if (loginDetails.username == Constants.admin.toString && loginDetails.password == Constants.password.toString)
       true
     else
       false
+  }
 
-  def checkUser(loginDetails: String): String =
+  def checkUser(loginDetails: String): String = {
     if (loginDetails == Constants.admin.toString)
       Constants.admin.toString
     else
       Constants.emptyString.toString
+  }
 
 }

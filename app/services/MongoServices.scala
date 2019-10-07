@@ -24,10 +24,11 @@ class MongoServices @Inject()(val reactiveMongoApi: ReactiveMongoApi) extends Co
     getCollection(Constants.loginDetails.toString).map {
       _.find(
         Json.obj(
-          Constants.firstName.toString -> loginDetails.username,
+          Constants.username.toString -> loginDetails.username,
           Constants.password.toString -> loginDetails.password
         )
-      ).cursor[SignUp]
+      )
+      .cursor[SignUp]
     }.flatMap(_.collect[List]()).map(list => list.length == 1)
   }
 

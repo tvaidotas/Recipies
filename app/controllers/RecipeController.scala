@@ -47,7 +47,7 @@ class RecipeController @Inject()
       }, { recipe =>
         mongoServices.getCollection(Constants.recipes.toString).flatMap(_.insert(recipe))
           .map(_ =>
-            Redirect(routes.RecipeController.recipe())
+            Redirect(routes.Application.index())
           )
       }
     )
@@ -94,9 +94,15 @@ class RecipeController @Inject()
           BadRequest(views.html.recipe(formWithErrors))
         }
       }, { recipe =>
-        mongoServices.getCollection(Constants.recipes.toString).map(_.findAndUpdate(BSONDocument(Constants.id.toString -> recipe.id.getOrElse(Constants.emptyString.toString)), recipe))
+        mongoServices.getCollection(Constants.recipes.toString)
+          .map(
+            _.findAndUpdate(
+              BSONDocument(Constants.id.toString -> recipe.id.getOrElse(Constants.emptyString.toString)),
+              recipe
+            )
+          )
           .map(_ =>
-            Redirect(routes.RecipeController.recipe())
+            Redirect(routes.Application.index())
           )
       }
     )
