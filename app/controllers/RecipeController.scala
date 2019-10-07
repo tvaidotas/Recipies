@@ -1,6 +1,7 @@
 package controllers
 
 import akka.stream.Materializer
+import authentication.AuthenticatedAction
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.AnyContent
 import services.MongoServices
@@ -20,7 +21,7 @@ class RecipeController @Inject()
 (val messagesApi: MessagesApi, val materializer: Materializer, val mongoServices: MongoServices) extends Controller
   with I18nSupport {
 
-  def recipe: Action[AnyContent] = Action.async { implicit request =>
+  def recipe: Action[AnyContent] = AuthenticatedAction.async { implicit request =>
     Future{
       Ok(
         views.html.recipe(

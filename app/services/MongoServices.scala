@@ -25,7 +25,7 @@ class MongoServices @Inject()(val reactiveMongoApi: ReactiveMongoApi) extends Co
       _.find(
         Json.obj(
           Constants.firstName.toString -> loginDetails.username,
-          Constants.lastName.toString -> loginDetails.password
+          Constants.password.toString -> loginDetails.password
         )
       ).cursor[SignUp]
     }.flatMap(_.collect[List]()).map(list => list.length == 1)
@@ -51,8 +51,8 @@ class MongoServices @Inject()(val reactiveMongoApi: ReactiveMongoApi) extends Co
           Constants.id.toString -> id
         )
       )
-        .sort(Json.obj(Constants.created.toString -> -1))
-        .cursor[Recipe]
+      .sort(Json.obj(Constants.created.toString -> -1))
+      .cursor[Recipe]
     }.flatMap(_.collect[List]())
   }
 

@@ -24,14 +24,17 @@ class LoginController @Inject()
     LoginDetails.loginForm.bindFromRequest.fold({ formWithErrors =>
       BadRequest(views.html.login(formWithErrors))
     }, { details =>
+      println(details.username + " " + details.password)
       loginDetails = details
     })
     mongoServices.validUser(loginDetails).map (result => {
       if (result) {
+        println("Valid user")
         Redirect(routes.Application.index())
           .withSession(request.session + (Constants.username.toString -> loginDetails.username))
           .flashing(Constants.login.toString -> Constants.loginMessage.toString)
       } else {
+        println("Invalid user")
         Redirect(routes.LoginController.login())
       }
     })
